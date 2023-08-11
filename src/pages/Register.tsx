@@ -12,10 +12,10 @@ import {
   InputRightElement,
 } from "@chakra-ui/react";
 
-import useLogin from "../hooks/useLogin";
+import useRegister from "../hooks/useRegister";
 import { validateEmail } from "../utils";
 
-const Login = () => {
+const Register = () => {
   const {
     register,
     handleSubmit,
@@ -25,7 +25,7 @@ const Login = () => {
     errors,
     show,
     mutation,
-  } = useLogin();
+  } = useRegister();
   return (
     <Box
       w="100%"
@@ -45,8 +45,41 @@ const Login = () => {
         w="100%"
         borderRadius="10px"
       >
-        <Heading mb={4}>Login</Heading>
+        <Heading mb={4}>Register</Heading>
         <FormControl isRequired>
+          <FormLabel>First Name</FormLabel>
+          <Input
+            {...register("first_name", {
+              required: {
+                value: true,
+                message: "First Name is required",
+              },
+            })}
+            type="text"
+            placeholder="Enter your first name"
+          />
+          {errors.first_name?.message && (
+            <Text color="red.500">{errors.first_name?.message}</Text>
+          )}
+        </FormControl>
+        <FormControl mt={4} isRequired>
+          <FormLabel>Last Name</FormLabel>
+          <Input
+            {...register("last_name", {
+              required: {
+                value: true,
+                message: "Last Name is required",
+              },
+            })}
+            type="text"
+            placeholder="Enter your last name"
+          />
+          {errors.last_name?.message && (
+            <Text color="red.500">{errors.last_name?.message}</Text>
+          )}
+        </FormControl>
+
+        <FormControl mt={4} isRequired>
           <FormLabel>Email</FormLabel>
           <Input
             {...register("email", {
@@ -101,15 +134,15 @@ const Login = () => {
           mt={6}
           width="full"
         >
-          {mutation.isLoading ? "Submitting" : "Login"}
+          {mutation.isLoading ? "Submitting" : "Register"}
         </Button>
 
         <Link mt={4} textAlign="center">
-          Don't have an account? <Link href="/register">Register</Link>
+          Already have an account? <Link href="/login">Login</Link>
         </Link>
       </Flex>
     </Box>
   );
 };
 
-export default Login;
+export default Register;

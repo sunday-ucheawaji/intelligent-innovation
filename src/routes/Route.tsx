@@ -6,6 +6,7 @@ import SuspenseContainer from "./SuspenseContainer";
 import { Box } from "@chakra-ui/react";
 
 const Login = React.lazy(() => import("../pages/Login"));
+const Register = React.lazy(() => import("../pages/Register"));
 
 const Router = () => {
   return (
@@ -17,6 +18,14 @@ const Router = () => {
             element={
               <SuspenseContainer>
                 <Login />
+              </SuspenseContainer>
+            }
+          />
+          <Route
+            path="/register"
+            element={
+              <SuspenseContainer>
+                <Register />
               </SuspenseContainer>
             }
           />
