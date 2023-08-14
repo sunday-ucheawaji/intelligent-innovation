@@ -4,6 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Loader from "../components/Loader";
 import SuspenseContainer from "./SuspenseContainer";
 import { Box } from "@chakra-ui/react";
+import RequireAuth from "./RequiredAuth";
 
 const Login = React.lazy(() => import("../pages/Login"));
 const Register = React.lazy(() => import("../pages/Register"));
@@ -36,7 +37,9 @@ const Router = () => {
             path="/profile"
             element={
               <SuspenseContainer>
-                <Profile />
+                <RequireAuth>
+                  <Profile />
+                </RequireAuth>
               </SuspenseContainer>
             }
           />
@@ -44,7 +47,9 @@ const Router = () => {
             path="/documents"
             element={
               <SuspenseContainer>
-                <DocumentViewer />
+                <RequireAuth>
+                  <DocumentViewer />
+                </RequireAuth>
               </SuspenseContainer>
             }
           />
@@ -52,7 +57,18 @@ const Router = () => {
             path="/sign-document"
             element={
               <SuspenseContainer>
-                <DocumentSigning />
+                <RequireAuth>
+                  <DocumentSigning />
+                </RequireAuth>
+              </SuspenseContainer>
+            }
+          />
+
+          <Route
+            path="*"
+            element={
+              <SuspenseContainer>
+                <Login />
               </SuspenseContainer>
             }
           />

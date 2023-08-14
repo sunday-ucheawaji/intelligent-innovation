@@ -48,31 +48,36 @@ const DocumentUpload = ({ fileSize, fileType, onSubmit }: Props) => {
       return;
     }
 
+    console.log("files", files);
+
     const filePromises = files.map((file) => {
       const formData = new FormData();
       formData.append("file", file);
-      return UploadToServerClient.post(formData);
+      // return UploadToServerClient.post(formData);
     });
+
+    console.log(filePromises);
 
     setUploading(true);
 
-    try {
-      const responses = await Promise.all(filePromises);
-      const filesArray = responses.map((res) => res.data.file);
-      onSubmit({ title, files: filesArray });
-    } catch (error) {
-      toast.error("An error occurred while uploading files.", {
-        position: "top-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-    } finally {
-      setUploading(false);
-    }
+    // try {
+    //   const responses = await Promise.all(filePromises);
+    //   const filesArray = responses.map((res) => res.data.file);
+
+    //   onSubmit({ title, files: filesArray });
+    // } catch (error) {
+    //   toast.error("An error occurred while uploading files.", {
+    //     position: "top-right",
+    //     autoClose: 5000,
+    //     hideProgressBar: false,
+    //     closeOnClick: true,
+    //     pauseOnHover: true,
+    //     draggable: true,
+    //     progress: undefined,
+    //   });
+    // } finally {
+    //   setUploading(false);
+    // }
   };
 
   return (

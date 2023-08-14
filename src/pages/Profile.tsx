@@ -36,6 +36,12 @@ function UserProfile() {
     location: "New York, USA",
   };
 
+  const handleLogout = () => {
+    localStorage.clear();
+    sessionStorage.clear();
+    window.location.href = "/login";
+  };
+
   return (
     <Flex
       h="100vh"
@@ -45,6 +51,16 @@ function UserProfile() {
       alignItems="center"
       flexDirection="column"
     >
+      <Box paddingLeft={5} width="100%" maxW="600px">
+        <Text
+          cursor="pointer"
+          onClick={() => handleLogout()}
+          color="red.500"
+          fontSize={18}
+        >
+          Logout
+        </Text>
+      </Box>
       <VStack
         h="85%"
         width="100%"
@@ -141,8 +157,8 @@ function UserProfile() {
           width="50%"
           maxW="600px"
           h="50px"
-          colorScheme="green.300"
-          bg="green.300"
+          colorScheme="blue.200"
+          bg="blue.200"
         >
           View Documents
         </Button>

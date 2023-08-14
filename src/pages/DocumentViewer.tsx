@@ -12,6 +12,7 @@ import { Document, Page, pdfjs } from "react-pdf";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { FetchDocumentsClient } from "../services/profileService";
+import { useNavigate } from "react-router-dom";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
@@ -24,6 +25,8 @@ const DocumentViewer = () => {
   const [pageNumber, setPageNumber] = useState(1);
   const [file, setFile] = useState<string | null>(null);
   const [scale, setScale] = useState(1);
+
+const navigate = useNavigate()
 
   const { data } = useQuery({
     queryFn: FetchDocumentsClient.getAll,
@@ -50,7 +53,7 @@ const DocumentViewer = () => {
   };
 
   return (
-    <Box h="100vh" maxW="container.xl" mx="auto" p={8}>
+    <Box bg="#F5F5F5" maxW="container.xl" mx="auto" p={8}>
       <HStack
         maxW="container.xl"
         paddingX="60px"
@@ -69,6 +72,7 @@ const DocumentViewer = () => {
           fontSize="sm"
           fontWeight="bold"
           mb={1}
+          onClick={()=> navigate("/profile")}
         >
           Back to Profile
         </Button>
@@ -86,14 +90,7 @@ const DocumentViewer = () => {
           </Document>
         )} */}
 
-        <Box
-        //   height="90vh" // Set the height as appropriate for your layout
-          //  width="100%" // You can also set a fixed width if you prefer
-          //   display="flex"
-          //  justifyContent="center"
-          //  alignItems="center"
-          overflowY="hidden" // Hide overflow to ensure only one page is visible
-        >
+        <Box height="770px" overflowY="hidden">
           <Document
             file="/sample.pdf"
             onLoadSuccess={handleDocumentLoadSuccess}

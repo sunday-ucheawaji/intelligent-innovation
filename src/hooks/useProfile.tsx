@@ -11,9 +11,9 @@ const useProfile = () => {
     mutationFn: ProfileServices.UploadClient.post,
   });
 
-
-
   const handleUploadDocument = (data: ProfileServices.IUploadInput) => {
+    console.log(data);
+
     mutation
       .mutateAsync(data)
       .then((res) => {
