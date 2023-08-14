@@ -2,7 +2,6 @@ import { useMutation } from "@tanstack/react-query";
 import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
 import * as authService from "../services/authService";
 import { InputsRegister } from "../services/authService";
-import { ResponseRegister } from "./../services/authService";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
@@ -38,7 +37,7 @@ const useRegister = () => {
   const onSubmit: SubmitHandler<InputsRegister> = (data) => {
     mutation
       .mutateAsync(data)
-      .then((res: any) => {
+      .then((res) => {
         console.log(res);
 
         toast.info("Registration Successfull !", {

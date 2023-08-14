@@ -7,6 +7,9 @@ import { Box } from "@chakra-ui/react";
 
 const Login = React.lazy(() => import("../pages/Login"));
 const Register = React.lazy(() => import("../pages/Register"));
+const Profile = React.lazy(() => import("../pages/Profile"));
+const DocumentViewer = React.lazy(() => import("../pages/DocumentViewer"));
+const DocumentSigning = React.lazy(() => import("../pages/DocumentSigning"));
 
 const Router = () => {
   return (
@@ -26,6 +29,30 @@ const Router = () => {
             element={
               <SuspenseContainer>
                 <Register />
+              </SuspenseContainer>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <SuspenseContainer>
+                <Profile />
+              </SuspenseContainer>
+            }
+          />
+          <Route
+            path="/documents"
+            element={
+              <SuspenseContainer>
+                <DocumentViewer />
+              </SuspenseContainer>
+            }
+          />
+          <Route
+            path="/sign-document"
+            element={
+              <SuspenseContainer>
+                <DocumentSigning />
               </SuspenseContainer>
             }
           />

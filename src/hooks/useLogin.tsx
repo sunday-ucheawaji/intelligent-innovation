@@ -1,10 +1,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { useForm, SubmitHandler, FieldErrors } from "react-hook-form";
-import * as authService from "../services/authService";
+import * as AuthService from "../services/authService";
 import { InputsLogin } from "../services/authService";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { setToken } from "../redux/userSlice";
+import { setToken, setUser } from "../redux/userSlice";
+import { useNavigate } from "react-router-dom";
 
 const useLogin = () => {
   const [show, setShow] = useState(false);
@@ -22,16 +23,16 @@ const useLogin = () => {
     },
   });
 
+  const navigate = useNavigate();
+
   const mutation = useMutation({
-    mutationFn: authService.LoginClient.post,
+    mutationFn: AuthService.LoginClient.post,
   });
 
   const onSubmit: SubmitHandler<InputsLogin> = (data) => {
     mutation
       .mutateAsync(data)
-      .then((res: any) => {
-        console.log(res);
-
+      .then((res) => {
         toast.info("Logged in Successfull !", {
           position: "top-right",
           autoClose: 5000,
@@ -41,9 +42,12 @@ const useLogin = () => {
           draggable: true,
           progress: undefined,
         });
-        localStorage.setItem("token", res.token);
+        navigate("/profile");
+        const { token, token_type } = res;
+        localStorage.setItem("token", token);
+        localStorage.setItem("token_type", token_type);
         reset();
-        dispatch(setToken(res?.token));
+        dispatch(setToken(res.token));
       })
       .catch((err) => {
         toast.error(err?.response?.data?.errors?.root, {

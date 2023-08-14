@@ -14,10 +14,12 @@ export interface InputsRegister {
   password: string;
 }
 
-export interface ResponseRegister {
+export interface IResponse {
   token: string;
   token_type: string;
 }
 
-export const LoginClient = new APIClient<InputsLogin>("/user/login");
-export const RegisterClient = new APIClient<InputsRegister>("/user/register");
+export const LoginClient = new APIClient<InputsLogin, IResponse>("/user/login");
+export const RegisterClient = new APIClient<InputsRegister, IResponse>(
+  "/user/register"
+);
