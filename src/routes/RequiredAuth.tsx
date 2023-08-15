@@ -6,8 +6,9 @@ interface RequireAuthProps {
 }
 
 function RequireAuth({ children }: RequireAuthProps) {
-  const token = localStorage.getItem("token");
   const location = useLocation(); // Use the useLocation hook here
+
+  const token = localStorage.getItem("token");
 
   if (!token) {
     localStorage.clear();

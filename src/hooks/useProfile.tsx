@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import * as ProfileServices from "../services/profileService";
+import { useEffect } from "react";
 
 const useProfile = () => {
   const { isLoading, isError, data, error } = useQuery({
@@ -23,6 +24,8 @@ const useProfile = () => {
         console.log(err);
       });
   };
+
+ 
   return { data, handleUploadDocument, mutation };
 };
 

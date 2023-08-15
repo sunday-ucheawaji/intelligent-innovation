@@ -43,11 +43,12 @@ const useLogin = () => {
           progress: undefined,
         });
         navigate("/profile");
+
         const { token, token_type } = res;
         localStorage.setItem("token", token);
         localStorage.setItem("token_type", token_type);
         reset();
-        dispatch(setToken(res.token));
+        window.location.reload();
       })
       .catch((err) => {
         toast.error(err?.response?.data?.errors?.root, {
